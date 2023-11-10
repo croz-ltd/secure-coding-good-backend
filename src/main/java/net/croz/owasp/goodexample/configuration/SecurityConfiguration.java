@@ -23,8 +23,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            //TODO: ovaj headers je za h2-konzolu
+            .headers().frameOptions().disable()
+            .and()
             .csrf()
-                .ignoringAntMatchers("/auth/login", "/auth/password-reset")
+                .ignoringAntMatchers("/auth/login", "/auth/password-reset", "/h2-console/**", "/product/**")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             .and()
             .formLogin()
@@ -33,7 +36,7 @@ public class SecurityConfiguration {
                 .failureUrl("/index.html?error=true")
             .and()
             .authorizeRequests()
-                .antMatchers("/auth/login", "/auth/password-reset").permitAll()
+                .antMatchers("/auth/login", "/auth/password-reset", "/h2-console/**", "/product/**").permitAll()
                 .anyRequest().authenticated()
             .and()
             .logout()
