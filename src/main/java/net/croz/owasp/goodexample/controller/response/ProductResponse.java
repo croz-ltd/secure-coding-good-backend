@@ -1,6 +1,7 @@
 package net.croz.owasp.goodexample.controller.response;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ProductResponse {
 
@@ -13,6 +14,8 @@ public class ProductResponse {
     private BigDecimal price;
 
     private String imageName;
+
+    private List<ProductCommentResponse> comments;
 
     public Long getId() {
         return id;
@@ -52,6 +55,14 @@ public class ProductResponse {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    public List<ProductCommentResponse> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<ProductCommentResponse> comments) {
+        this.comments = comments;
     }
 
 }

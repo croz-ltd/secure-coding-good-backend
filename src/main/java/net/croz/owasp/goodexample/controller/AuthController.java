@@ -1,6 +1,5 @@
 package net.croz.owasp.goodexample.controller;
 
-
 import net.croz.owasp.goodexample.service.AuthService;
 import net.croz.owasp.goodexample.service.command.ResetPasswordCommand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ public class AuthController {
         this.authService = authService;
     }
 
-
     @PostMapping("/password-reset")
     public void resetPassword(@RequestBody ResetPasswordCommand resetPasswordCommand) {
         authService.resetPassword(resetPasswordCommand);
     }
+
 }
