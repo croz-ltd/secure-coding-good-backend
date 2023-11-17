@@ -15,3 +15,7 @@ server:
   servlet:
     session:
       timeout: 1m
+      cookie:
+        domain: owasp-guidelines-good.com
+        path: /
+    context-path: /good-example
