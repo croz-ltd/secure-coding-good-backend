@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -53,6 +55,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductResponse findOne(@PathVariable Long id) {
         return productProductResponseCreateMapper.map(productService.findById(id));
+    }
+
+    @GetMapping
+    public List<ProductResponse> findAll() {
+        return productProductResponseCreateMapper.mapToList(productService.findAll());
     }
 
     @PostMapping("/{id}/comment")
