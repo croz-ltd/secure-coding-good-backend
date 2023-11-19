@@ -14,7 +14,7 @@ spring:
 server:
   servlet:
     session:
-      timeout: 1m
+      timeout: 30m
       cookie:
         domain: owasp-guidelines-good.com
         path: /
