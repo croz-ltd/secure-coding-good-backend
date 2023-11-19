@@ -28,11 +28,6 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="initial_data-07112023-01" author="bbes">
-        <comment>Added inital data</comment>
-        <sqlFile path="sql/data.sql" relativeToChangelogFile="true" />
-    </changeSet>
-
     <changeSet id="product-image-09112023-01" author="bbes">
         <comment>Create product image table</comment>
         <createSequence sequenceName="product_image_id_seq" startValue="1" incrementBy="1" />
@@ -59,7 +54,7 @@
             <column name="name" type="varchar(256)">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="varchar(256)">
+            <column name="description" type="varchar(2000)">
                 <constraints nullable="false" />
             </column>
             <column name="price" type="DECIMAL(10,2)" />
@@ -86,5 +81,16 @@
                 <constraints references="product(id)" foreignKeyName="fk_product_comment_product" />
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="image_data-10112023-01" author="bbes">
+        <comment>Added inital image data</comment>
+        <sqlFile path="sql/image-data.sql" relativeToChangelogFile="true" />
+        <sqlFile path="sql/product-data.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet id="initial_data-07112023-01" author="bbes">
+        <comment>Added inital data</comment>
+        <sqlFile path="sql/data.sql" relativeToChangelogFile="true" />
     </changeSet>
 </databaseChangeLog>
