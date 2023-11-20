@@ -39,7 +39,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
             .formLogin()
                 .loginProcessingUrl("/auth/login")
                 .successHandler((req, res, auth) -> res.setStatus(HttpStatus.OK.value()))
-                .failureUrl("/index.html?error=true")
+                .failureHandler((req, res, ex) -> res.setStatus(HttpStatus.UNAUTHORIZED.value()))
             .and()
             .authorizeRequests()
                 .antMatchers("/auth/login", "/auth/password-reset", "/h2-console/**").permitAll()
