@@ -60,6 +60,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         CookieCsrfTokenRepository tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
         tokenRepository.setCookiePath("/");
         tokenRepository.setCookieDomain("owasp-guidelines-good.com");
+        tokenRepository.setHeaderName("Xsrf-Token");
         return tokenRepository;
     }
 
