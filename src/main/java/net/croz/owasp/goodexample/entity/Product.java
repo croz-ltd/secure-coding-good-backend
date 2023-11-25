@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -45,6 +46,10 @@ public class Product {
     @JoinColumn(name = "product_id",
         foreignKey = @ForeignKey(name = "fk_product_comment_product"))
     private List<ProductComment> productComments;
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private UserSeller seller;
 
     public Long getId() {
         return id;
@@ -103,6 +108,14 @@ public class Product {
             this.productComments.addAll(productComments);
         }
 
+    }
+
+    public UserSeller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(UserSeller seller) {
+        this.seller = seller;
     }
 
 }

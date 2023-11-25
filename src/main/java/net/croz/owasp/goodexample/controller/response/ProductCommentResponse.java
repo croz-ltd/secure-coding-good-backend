@@ -10,6 +10,8 @@ public class ProductCommentResponse {
 
     private LocalDateTime creationDate;
 
+    private UserResponse creator;
+
     public Long getId() {
         return id;
     }
@@ -32,6 +34,14 @@ public class ProductCommentResponse {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public UserResponse getCreator() {
+        return creator;
+    }
+
+    public void setCreator(UserResponse creator) {
+        this.creator = creator;
     }
 
 }

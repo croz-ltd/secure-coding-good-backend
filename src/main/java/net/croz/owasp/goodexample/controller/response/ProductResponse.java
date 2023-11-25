@@ -17,6 +17,8 @@ public class ProductResponse {
 
     private List<ProductCommentResponse> comments;
 
+    private UserResponse seller;
+
     public Long getId() {
         return id;
     }
@@ -63,6 +65,14 @@ public class ProductResponse {
 
     public void setComments(List<ProductCommentResponse> comments) {
         this.comments = comments;
+    }
+
+    public UserResponse getSeller() {
+        return seller;
+    }
+
+    public void setSeller(UserResponse seller) {
+        this.seller = seller;
     }
 
 }

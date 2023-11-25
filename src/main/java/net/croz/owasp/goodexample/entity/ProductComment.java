@@ -19,7 +19,8 @@ public class ProductComment {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_comment_id_generator")
-    @SequenceGenerator(name = "product_comment_id_generator", sequenceName = "product_comment_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "product_comment_id_generator", sequenceName = "product_comment_id_seq",
+        allocationSize = 1)
     private Long id;
 
     @Column(name = "text")
@@ -32,6 +33,11 @@ public class ProductComment {
     @JoinColumn(name = "product_id",
         foreignKey = @ForeignKey(name = "fk_product_comment_product"))
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "creator_id",
+        foreignKey = @ForeignKey(name = "fk_product_comment_user_buyer"))
+    private UserBuyer creator;
 
     public Long getId() {
         return id;
@@ -63,6 +69,14 @@ public class ProductComment {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public UserBuyer getCreator() {
+        return creator;
+    }
+
+    public void setCreator(UserBuyer creator) {
+        this.creator = creator;
     }
 
 }
