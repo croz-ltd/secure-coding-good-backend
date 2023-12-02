@@ -1,5 +1,6 @@
 package net.croz.owasp.goodexample.controller;
 
+import jakarta.validation.Valid;
 import net.croz.owasp.goodexample.annotation.CurrentUser;
 import net.croz.owasp.goodexample.controller.response.OrderResponse;
 import net.croz.owasp.goodexample.controller.response.ProductCommentResponse;
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -71,7 +71,7 @@ public class ProductController {
         return productProductResponseCreateMapper.map(productService.findById(id));
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<ProductResponse> findAll() {
         return productProductResponseCreateMapper.mapToList(productService.findAll());
     }

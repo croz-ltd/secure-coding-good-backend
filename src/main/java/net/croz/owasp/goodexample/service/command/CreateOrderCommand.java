@@ -1,6 +1,6 @@
 package net.croz.owasp.goodexample.service.command;
 
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Min;
 
 public class CreateOrderCommand {
 
