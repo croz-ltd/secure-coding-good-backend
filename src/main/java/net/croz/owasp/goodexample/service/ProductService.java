@@ -2,6 +2,7 @@ package net.croz.owasp.goodexample.service;
 
 import net.croz.owasp.goodexample.entity.Product;
 import net.croz.owasp.goodexample.entity.ProductComment;
+import net.croz.owasp.goodexample.entity.UserBuyer;
 import net.croz.owasp.goodexample.service.command.CreateProductCommand;
 import net.croz.owasp.goodexample.service.command.CreateProductCommentCommand;
 
@@ -15,6 +16,6 @@ public interface ProductService {
 
     List<Product> findAll();
 
-    ProductComment createComment(Long id, CreateProductCommentCommand createProductCommentCommand);
+    ProductComment createComment(Long id, CreateProductCommentCommand createProductCommentCommand, UserBuyer userBuyer);
 
 }

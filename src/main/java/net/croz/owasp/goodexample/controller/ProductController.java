@@ -1,9 +1,11 @@
 package net.croz.owasp.goodexample.controller;
 
+import net.croz.owasp.goodexample.annotation.CurrentUser;
 import net.croz.owasp.goodexample.controller.response.ProductCommentResponse;
 import net.croz.owasp.goodexample.controller.response.ProductResponse;
 import net.croz.owasp.goodexample.entity.Product;
 import net.croz.owasp.goodexample.entity.ProductComment;
+import net.croz.owasp.goodexample.entity.UserBuyer;
 import net.croz.owasp.goodexample.mapper.CreateMapper;
 import net.croz.owasp.goodexample.service.ProductService;
 import net.croz.owasp.goodexample.service.StorageService;
@@ -64,9 +66,9 @@ public class ProductController {
 
     @PostMapping("/{id}/comment")
     public ProductCommentResponse createComment(@PathVariable Long id,
-        @RequestBody CreateProductCommentCommand createProductCommentCommand) {
+        @RequestBody CreateProductCommentCommand createProductCommentCommand, @CurrentUser UserBuyer userBuyer) {
         return productCommentProductCommentResponseCreateMapper.map(
-            productService.createComment(id, createProductCommentCommand));
+            productService.createComment(id, createProductCommentCommand, userBuyer));
     }
 
     @GetMapping("/files/{filename:.+}")

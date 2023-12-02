@@ -1,10 +1,10 @@
-INSERT INTO auth_user(username, password, security_question_one, security_question_two, security_question_three)
+INSERT INTO auth_user(username, user_type, password, security_question_one, security_question_two, security_question_three)
 VALUES
-    ('john.doe', '$2a$10$tHrBt0dxnAPHYn8O55BNeOfSYLahaK5uyOxBZ2VX5IAkQ68qee58m', 'Cityville', 'High School A', 'Park'),
-    ('alice.smith', '$2a$10$6JI..F1Occ/zBydZKZ8Li.5ItQl/4w2NhOKrg4QAvOJEjhBjJ7NZq', 'Townsville', 'High School B', 'Beach'),
-    ('david.jones', '$2a$10$ouAVLQSEhvIMyFQAVF.e0u4RI2SIbVf.XtoeMGsbvdwmFP9GtmqtS', 'Villagetown', 'High School C', 'Library'),
-    ('emily.brown', '$2a$10$Le.dvmOiDJo7yInpOvxYiuCm29un3KzKWiOcoquL0E3E4N7OxlQp.', 'Hamletsville', 'High School D', 'Coffee Shop'),
-    ('chris.wilson', '$2a$10$t9rckjA0FCGwforcTKi.T.CV3Xfs1FLxtJiDgzfB6VkBs.Ah1IO.i', 'Suburbia', 'High School E', 'Gym');
+    ('john.doe', 'BUYER', '$2a$10$tHrBt0dxnAPHYn8O55BNeOfSYLahaK5uyOxBZ2VX5IAkQ68qee58m', 'Cityville', 'High School A', 'Park'),
+    ('alice.smith', 'BUYER', '$2a$10$6JI..F1Occ/zBydZKZ8Li.5ItQl/4w2NhOKrg4QAvOJEjhBjJ7NZq', 'Townsville', 'High School B', 'Beach'),
+    ('david.jones', 'BUYER', '$2a$10$ouAVLQSEhvIMyFQAVF.e0u4RI2SIbVf.XtoeMGsbvdwmFP9GtmqtS', 'Villagetown', 'High School C', 'Library'),
+    ('emily.brown', 'BUYER', '$2a$10$Le.dvmOiDJo7yInpOvxYiuCm29un3KzKWiOcoquL0E3E4N7OxlQp.', 'Hamletsville', 'High School D', 'Coffee Shop'),
+    ('chris.wilson', 'BUYER', '$2a$10$t9rckjA0FCGwforcTKi.T.CV3Xfs1FLxtJiDgzfB6VkBs.Ah1IO.i', 'Suburbia', 'High School E', 'Gym');
 
 INSERT INTO user_buyer(id, address)
 VALUES
@@ -14,13 +14,13 @@ VALUES
     (4, '101 Elm St, Hamletsville'),
     (5, '202 Maple St, Suburbia');
 
-INSERT INTO auth_user(username, password, security_question_one, security_question_two, security_question_three)
+INSERT INTO auth_user(username, user_type, password, security_question_one, security_question_two, security_question_three)
 VALUES
-    ('sarah.miller', '$2a$10$IfoAelLFjMwBEGq6j34sOe.el1e5A0XzvcQREvrZMhasJ083xKaA2', 'Ruralville', 'High School F', 'Grocery Store'),
-    ('jason.white', '$2a$10$4CIOU4VQkHaXEf/1bRBrXOLDOBZKKXYuyK5iZQ3YogBU1fZ80jKqu', 'Downtown', 'High School G', 'Movie Theater'),
-    ('lisa.green', '$2a$10$JkGRMEHrHVUEOBJGDoh6BeQ1bi1bW80zzBSP8tREHk54zZC0s303C', 'Mountainside', 'High School H', 'Park'),
-    ('kevin.jenkins', '$2a$10$UysFUi7NWYGHiVTxCgv8ketANrXrQg/TmxdLKL1kXS3PqycNGcM56', 'Lakeside', 'High School I', 'Beach'),
-    ('laura.smith', '$2a$10$p7KAM4M9JZt4ox2qtFjsUOezYgTxW7t71C/OZvQMej2LRKFY7uy1W', 'Countryside', 'High School J', 'Restaurant');
+    ('sarah.miller', 'SELLER', '$2a$10$IfoAelLFjMwBEGq6j34sOe.el1e5A0XzvcQREvrZMhasJ083xKaA2', 'Ruralville', 'High School F', 'Grocery Store'),
+    ('jason.white', 'SELLER', '$2a$10$4CIOU4VQkHaXEf/1bRBrXOLDOBZKKXYuyK5iZQ3YogBU1fZ80jKqu', 'Downtown', 'High School G', 'Movie Theater'),
+    ('lisa.green', 'SELLER', '$2a$10$JkGRMEHrHVUEOBJGDoh6BeQ1bi1bW80zzBSP8tREHk54zZC0s303C', 'Mountainside', 'High School H', 'Park'),
+    ('kevin.jenkins', 'SELLER', '$2a$10$UysFUi7NWYGHiVTxCgv8ketANrXrQg/TmxdLKL1kXS3PqycNGcM56', 'Lakeside', 'High School I', 'Beach'),
+    ('laura.smith', 'SELLER', '$2a$10$p7KAM4M9JZt4ox2qtFjsUOezYgTxW7t71C/OZvQMej2LRKFY7uy1W', 'Countryside', 'High School J', 'Restaurant');
 
 INSERT INTO user_seller(id, oib)
 VALUES
@@ -30,5 +30,5 @@ VALUES
     (9, '90123456789'),
     (10, '12398765432');
 
-INSERT INTO auth_user(username, password, security_question_one, security_question_two, security_question_three)
-VALUES ('admin', '$2a$10$096qkydajQZnEZKnf5SzAOTpL9jN03LUmfs.iQ0eYjKuD0X33diOS', 'Osijek', 'Srednja škola', 'Škola');
+INSERT INTO auth_user(username, user_type, password, security_question_one, security_question_two, security_question_three)
+VALUES ('admin', 'ADMIN', '$2a$10$096qkydajQZnEZKnf5SzAOTpL9jN03LUmfs.iQ0eYjKuD0X33diOS', 'Osijek', 'Srednja škola', 'Škola');
