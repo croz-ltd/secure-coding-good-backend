@@ -2,6 +2,9 @@ package net.croz.owasp.goodexample.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import net.croz.owasp.goodexample.controller.response.UserResponse;
+import net.croz.owasp.goodexample.entity.AuthUser;
+import net.croz.owasp.goodexample.mapper.CreateMapper;
 import net.croz.owasp.goodexample.service.AuthService;
 import net.croz.owasp.goodexample.service.command.LoginCommand;
 import net.croz.owasp.goodexample.service.command.ResetPasswordCommand;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
@@ -30,10 +34,19 @@ public class AuthController {
 
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
+    private final CreateMapper<AuthUser, UserResponse> authUserUserResponseCreateMapper;
+
     @Autowired
-    public AuthController(AuthService authService, AuthenticationManager authenticationManager) {
+    public AuthController(AuthService authService, AuthenticationManager authenticationManager,
+        CreateMapper<AuthUser, UserResponse> authUserUserResponseCreateMapper) {
         this.authService = authService;
         this.authenticationManager = authenticationManager;
+        this.authUserUserResponseCreateMapper = authUserUserResponseCreateMapper;
+    }
+
+    @GetMapping("/current-user")
+    public UserResponse getCurrentUser(@AuthenticationPrincipal AuthUser authUser) {
+        return authUserUserResponseCreateMapper.map(authUser);
     }
 
     @PostMapping("/login")
