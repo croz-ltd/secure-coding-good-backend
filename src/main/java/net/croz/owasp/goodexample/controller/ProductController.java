@@ -9,6 +9,7 @@ import net.croz.owasp.goodexample.entity.Order;
 import net.croz.owasp.goodexample.entity.Product;
 import net.croz.owasp.goodexample.entity.ProductComment;
 import net.croz.owasp.goodexample.entity.UserBuyer;
+import net.croz.owasp.goodexample.entity.UserSeller;
 import net.croz.owasp.goodexample.mapper.CreateMapper;
 import net.croz.owasp.goodexample.service.OrderService;
 import net.croz.owasp.goodexample.service.ProductService;
@@ -62,8 +63,10 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ProductResponse createProduct(@ModelAttribute CreateProductCommand createProductCommand) {
-        return productProductResponseCreateMapper.map(productService.create(createProductCommand));
+    public ProductResponse createProduct(
+        @ModelAttribute CreateProductCommand createProductCommand,
+        @CurrentUser UserSeller userSeller) {
+        return productProductResponseCreateMapper.map(productService.create(createProductCommand, userSeller));
     }
 
     @GetMapping("/{id}")
