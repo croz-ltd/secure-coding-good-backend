@@ -6,8 +6,10 @@ import net.croz.owasp.goodexample.entity.ProductImage;
 import net.croz.owasp.goodexample.entity.UserBuyer;
 import net.croz.owasp.goodexample.entity.UserSeller;
 import net.croz.owasp.goodexample.exception.EntityNotFoundException;
+import net.croz.owasp.goodexample.exception.FileTypeException;
 import net.croz.owasp.goodexample.repository.ProductCommentRepository;
 import net.croz.owasp.goodexample.repository.ProductRepository;
+import net.croz.owasp.goodexample.service.FilePreconditionService;
 import net.croz.owasp.goodexample.service.ProductService;
 import net.croz.owasp.goodexample.service.StorageService;
 import net.croz.owasp.goodexample.service.command.CreateProductCommand;
@@ -28,17 +30,28 @@ public class ProductServiceImpl implements ProductService {
 
     private final StorageService storageService;
 
+    private final FilePreconditionService filePreconditionService;
+
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ProductCommentRepository productCommentRepository,
-        StorageService storageService) {
+    public ProductServiceImpl(
+        ProductRepository productRepository,
+        ProductCommentRepository productCommentRepository,
+        StorageService storageService,
+        FilePreconditionService filePreconditionService
+    ) {
         this.productRepository = productRepository;
         this.productCommentRepository = productCommentRepository;
         this.storageService = storageService;
+        this.filePreconditionService = filePreconditionService;
     }
 
     @Transactional
     @Override
     public Product create(CreateProductCommand createProductCommand, UserSeller userSeller) {
+        if (!filePreconditionService.canUpload(createProductCommand.getImage())) {
+            throw new FileTypeException("Invalid file type");
+        }
+
         final ProductImage productImage = storageService.store(createProductCommand.getImage());
 
         final Product product = new Product();
