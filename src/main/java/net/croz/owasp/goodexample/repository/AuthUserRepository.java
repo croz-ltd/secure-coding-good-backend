@@ -32,4 +32,14 @@ public class AuthUserRepository {
         jdbcTemplate.update(query, authUser.getPassword(), authUser.getId());
     }
 
+    public void updateLoginAttempts(AuthUser authUser) {
+        final String query = "UPDATE auth_user SET failed_attempts = ?, last_attempt = ?, locked_until = ? WHERE id = ?";
+        jdbcTemplate.update(
+            query,
+            authUser.getFailedAttempts(),
+            authUser.getLastAttempt(),
+            authUser.getLockedUntil(),
+            authUser.getId());
+    }
+
 }

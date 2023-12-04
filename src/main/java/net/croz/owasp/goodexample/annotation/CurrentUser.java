@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-@AuthenticationPrincipal(expression = "@authServiceImpl.getUserByType(#this)")
+@AuthenticationPrincipal(expression = "@authUserServiceImpl.getUserByType(#this)")
 public @interface CurrentUser {
 
 }

@@ -28,6 +28,9 @@
             <column name="security_question_three" type="varchar(256)">
                 <constraints nullable="false" />
             </column>
+            <column name="failed_attempts" type="int" />
+            <column name="last_attempt" type="datetime" />
+            <column name="locked_until" type="datetime" />
         </createTable>
     </changeSet>
 

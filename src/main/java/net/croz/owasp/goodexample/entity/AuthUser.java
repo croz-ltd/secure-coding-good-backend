@@ -14,6 +14,9 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -33,6 +36,15 @@ public class AuthUser implements UserDetails {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "failed_attempts")
+    private Integer failedAttempts;
+
+    @Column(name = "last_attempt")
+    private LocalDateTime lastAttempt;
+
+    @Column(name = "locked_until")
+    private LocalDateTime lockedUntil;
 
     @Column(name = "security_question_one")
     private String securityQuestionOne;
@@ -69,6 +81,30 @@ public class AuthUser implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getFailedAttempts() {
+        return failedAttempts;
+    }
+
+    public void setFailedAttempts(Integer failedAttempts) {
+        this.failedAttempts = failedAttempts;
+    }
+
+    public LocalDateTime getLastAttempt() {
+        return lastAttempt;
+    }
+
+    public void setLastAttempt(LocalDateTime lastAttempt) {
+        this.lastAttempt = lastAttempt;
+    }
+
+    public LocalDateTime getLockedUntil() {
+        return lockedUntil;
+    }
+
+    public void setLockedUntil(LocalDateTime lockedUntil) {
+        this.lockedUntil = lockedUntil;
     }
 
     public String getSecurityQuestionOne() {

@@ -1,12 +1,16 @@
 package net.croz.owasp.goodexample.service;
 
-import net.croz.owasp.goodexample.entity.AuthUser;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import net.croz.owasp.goodexample.service.command.LoginCommand;
 import net.croz.owasp.goodexample.service.command.ResetPasswordCommand;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface AuthService extends UserDetailsService {
+public interface AuthService {
 
     void resetPassword(ResetPasswordCommand resetPasswordCommand);
 
-    AuthUser getUserByType(AuthUser authUser);
+    void login(LoginCommand loginCommand, HttpServletRequest request, HttpServletResponse response);
+
+    void loginAttemptFailed(String username);
+
 }

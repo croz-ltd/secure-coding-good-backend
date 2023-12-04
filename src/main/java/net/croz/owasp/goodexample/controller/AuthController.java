@@ -9,14 +9,7 @@ import net.croz.owasp.goodexample.service.AuthService;
 import net.croz.owasp.goodexample.service.command.LoginCommand;
 import net.croz.owasp.goodexample.service.command.ResetPasswordCommand;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,17 +23,12 @@ public class AuthController {
 
     private final AuthService authService;
 
-    private final AuthenticationManager authenticationManager;
-
-    private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
-
     private final CreateMapper<AuthUser, UserResponse> authUserUserResponseCreateMapper;
 
     @Autowired
-    public AuthController(AuthService authService, AuthenticationManager authenticationManager,
+    public AuthController(AuthService authService,
         CreateMapper<AuthUser, UserResponse> authUserUserResponseCreateMapper) {
         this.authService = authService;
-        this.authenticationManager = authenticationManager;
         this.authUserUserResponseCreateMapper = authUserUserResponseCreateMapper;
     }
 
@@ -50,18 +38,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void authenticateUser(
-        @RequestBody LoginCommand loginCommand,
-        HttpServletRequest request,
-        HttpServletResponse response
-    ) {
-        final UsernamePasswordAuthenticationToken token = UsernamePasswordAuthenticationToken.unauthenticated(
-            loginCommand.getUsername(), loginCommand.getPassword());
-        final Authentication authentication = authenticationManager.authenticate(token);
-        final SecurityContext context = SecurityContextHolder.createEmptyContext();
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
-        securityContextRepository.saveContext(context, request, response);
+    public void authenticateUser(@RequestBody LoginCommand loginCommand, HttpServletRequest request,
+        HttpServletResponse response) {
+        authService.login(loginCommand, request, response);
     }
 
     @PostMapping("/password-reset")
