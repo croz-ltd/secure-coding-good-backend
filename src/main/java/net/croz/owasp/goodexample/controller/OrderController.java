@@ -5,6 +5,7 @@ import net.croz.owasp.goodexample.entity.Order;
 import net.croz.owasp.goodexample.mapper.CreateMapper;
 import net.croz.owasp.goodexample.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ public class OrderController {
     }
 
     @GetMapping("/")
+    @PreAuthorize("@orderSecurityServiceImpl.canFindAll(authentication.principal)")
     public List<OrderResponse> findAll() {
         return orderOrderResponseCreateMapper.mapToList(orderService.findAll());
     }

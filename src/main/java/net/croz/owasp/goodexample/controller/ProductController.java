@@ -22,6 +22,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,6 +65,7 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("@productSecurityServiceImpl.canCreateProduct(authentication.principal)")
     public ProductResponse createProduct(
         @ModelAttribute CreateProductCommand createProductCommand,
         @CurrentUser UserSeller userSeller) {
@@ -71,16 +73,19 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("@productSecurityServiceImpl.canFindOne(authentication.principal)")
     public ProductResponse findOne(@PathVariable Long id) {
         return productProductResponseCreateMapper.map(productService.findById(id));
     }
 
     @GetMapping("/")
+    @PreAuthorize("@productSecurityServiceImpl.canFindAll(authentication.principal)")
     public List<ProductResponse> findAll() {
         return productProductResponseCreateMapper.mapToList(productService.findAll());
     }
 
     @PostMapping("/{id}/order")
+    @PreAuthorize("@productSecurityServiceImpl.canPlaceOrder(authentication.principal)")
     public OrderResponse placeOrder(
         @PathVariable Long id,
         @RequestBody @Valid CreateOrderCommand createOrderCommand,
@@ -89,6 +94,7 @@ public class ProductController {
     }
 
     @PostMapping("/{id}/comment")
+    @PreAuthorize("@productSecurityServiceImpl.canCreateComment(authentication.principal)")
     public ProductCommentResponse createComment(@PathVariable Long id,
         @RequestBody CreateProductCommentCommand createProductCommentCommand, @CurrentUser UserBuyer userBuyer) {
         return productCommentProductCommentResponseCreateMapper.map(
@@ -96,8 +102,8 @@ public class ProductController {
     }
 
     @GetMapping("/files/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+    @PreAuthorize("@productSecurityServiceImpl.canGetFile(authentication.principal)")
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
         Resource file = storageService.loadAsResource(filename);
 
         if (file == null) {
