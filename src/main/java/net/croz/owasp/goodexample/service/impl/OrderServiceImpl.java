@@ -64,6 +64,11 @@ public class OrderServiceImpl implements OrderService {
         return savedOrder;
     }
 
+    @Override
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
+
     // TODO: da li je ovo zbilja najbolja implementacija - bbes
     public boolean canPlaceOrder(Product product, CreateOrderCommand createOrderCommand, UserBuyer userBuyer) {
         final List<Order> orders = orderRepository.findAllByBuyerAndCreationDateBetween(
