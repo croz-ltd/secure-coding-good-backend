@@ -16,6 +16,6 @@ server:
     session:
       timeout: 30m
       cookie:
-        domain: owasp-guidelines-good.com
+        domain: owasp-guidelines-good.m8c.io
         path: /
     context-path: /good-example

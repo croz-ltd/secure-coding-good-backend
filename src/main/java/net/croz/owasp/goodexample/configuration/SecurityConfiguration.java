@@ -65,7 +65,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOrigins("http://owasp-guidelines-good.com")
+                    .allowedOrigins("owasp-guidelines-good.m8c.io")
                     .allowedHeaders(HttpHeaders.CONTENT_TYPE, "X-CSRF-TOKEN")
                     .allowedMethods("GET", "POST", "OPTIONS")
                     .allowCredentials(true);
