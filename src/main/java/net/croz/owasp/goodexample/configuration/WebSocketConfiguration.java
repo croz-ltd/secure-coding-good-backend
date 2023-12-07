@@ -31,7 +31,6 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
             .addEndpoint("/good-example-stomp");
     }
 
-    // TODO: Dodaj da se samo kupci mogu spojiti - bbes
     @Bean
     AuthorizationManager<Message<?>> messageAuthorizationManager(MessageMatcherDelegatingAuthorizationManager.Builder messages) {
         messages

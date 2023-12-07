@@ -18,6 +18,10 @@ public class AuthUserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    // OWASP[14]
+    // OWASP[167]
+    // OWASP[168]
+    // OWASP[173]
     public Optional<AuthUser> loadUserByUsername(String username) {
         final String query = "SELECT * FROM auth_user WHERE username = ?";
 

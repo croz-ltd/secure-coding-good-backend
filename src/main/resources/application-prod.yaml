@@ -1,5 +1,11 @@
 spring:
   datasource:
+    # OWASP[35]
+    # OWASP[135]
+    # OWASP[171]
+    # OWASP[172]
+    # OWASP[175]
+    # OWASP[178]
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
@@ -15,6 +21,7 @@ spring:
 server:
   servlet:
     session:
+      # OWASP[64]
       timeout: 30m
       cookie:
         domain: owasp-guidelines-good.m8c.io

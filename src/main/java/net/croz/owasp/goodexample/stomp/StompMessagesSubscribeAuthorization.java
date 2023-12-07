@@ -23,6 +23,7 @@ public class StompMessagesSubscribeAuthorization implements ChannelInterceptor {
             final AuthUser authUser = (AuthUser) auth.getPrincipal();
 
             final String destination = accessor.getDestination();
+            // OWASP[81]
             if (!Objects.equals(String.format("/product/%d", authUser.getId()), destination)) {
                 throw new IllegalArgumentException("Can not subscribe to topic");
             }

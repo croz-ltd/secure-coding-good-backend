@@ -24,6 +24,7 @@ import static org.springframework.security.web.header.writers.ClearSiteDataHeade
 @EnableMethodSecurity
 public class SecurityConfiguration implements WebMvcConfigurer {
 
+    // OWASP[30]
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
@@ -32,6 +33,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            // OWASP[73]
             .csrf((csrf) -> csrf.ignoringRequestMatchers("/h2-console/**"))
             .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions().disable())
             .authorizeHttpRequests(authorize -> authorize
@@ -49,6 +51,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 logout.addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES)));
                 logout.deleteCookies("JSESSIONID");
             })
+            // OWASP[66]
+            // OWASP[68]
             .sessionManagement(session -> session.maximumSessions(1));
 
         return http.build();

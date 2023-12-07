@@ -1,5 +1,7 @@
 package net.croz.owasp.goodexample.controller.response;
 
+// OWASP[89]
+// OWASP[131]
 public class UserResponse {
 
     private Long id;

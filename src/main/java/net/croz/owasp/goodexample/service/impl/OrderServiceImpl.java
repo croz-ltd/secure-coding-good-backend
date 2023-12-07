@@ -69,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAll();
     }
 
-    // TODO: da li je ovo zbilja najbolja implementacija - bbes
+    // OWASP[94]
     public boolean canPlaceOrder(Product product, CreateOrderCommand createOrderCommand, UserBuyer userBuyer) {
         final List<Order> orders = orderRepository.findAllByBuyerAndCreationDateBetween(
             userBuyer,

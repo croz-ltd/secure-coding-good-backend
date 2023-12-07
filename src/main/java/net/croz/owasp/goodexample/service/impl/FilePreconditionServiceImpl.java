@@ -25,6 +25,11 @@ public class FilePreconditionServiceImpl implements FilePreconditionService {
         mediaTypes = Set.of(jpeg, tiff, jpg, png);
     }
 
+    // OWASP[182]
+    // OWASP[183]
+    // OWASP[184]
+    // OWASP[188]
+    // OWASP[190]
     @Override
     public boolean canUpload(MultipartFile file) {
         try {

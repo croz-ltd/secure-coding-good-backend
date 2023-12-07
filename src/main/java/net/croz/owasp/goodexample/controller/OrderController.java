@@ -27,6 +27,10 @@ public class OrderController {
         this.orderOrderResponseCreateMapper = orderOrderResponseCreateMapper;
     }
 
+    // OWASP[84]
+    // OWASP[85]
+    // OWASP[87]
+    // OWASP[88]
     @GetMapping("/")
     @PreAuthorize("@orderSecurityServiceImpl.canFindAll(authentication.principal)")
     public List<OrderResponse> findAll() {

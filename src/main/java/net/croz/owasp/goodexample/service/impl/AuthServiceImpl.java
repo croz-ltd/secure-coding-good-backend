@@ -73,8 +73,8 @@ public class AuthServiceImpl implements AuthService {
     public void login(LoginCommand loginCommand, HttpServletRequest request, HttpServletResponse response) {
         final AuthUser authUser = authUserService.loadUserByUsername(loginCommand.getUsername());
 
+        // OWASP[41]
         if (authUser.getLockedUntil() != null && authUser.getLockedUntil().isAfter(LocalDateTime.now())) {
-            //TODO: Porukica ? - bbes
             throw new LoginBlockedException();
         }
         final UsernamePasswordAuthenticationToken token = UsernamePasswordAuthenticationToken.unauthenticated(
@@ -86,6 +86,7 @@ public class AuthServiceImpl implements AuthService {
         securityContextRepository.saveContext(context, request, response);
     }
 
+    // OWASP[41]
     public void loginAttemptFailed(String username) {
         final AuthUser authUser = authUserService.loadUserByUsername(username);
         if (!Objects.equals(authUser.getFailedAttempts(), 5)) {
