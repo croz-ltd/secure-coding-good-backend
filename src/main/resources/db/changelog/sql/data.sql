@@ -31,4 +31,9 @@ VALUES
     (10, '12398765432');
 
 INSERT INTO auth_user(username, user_type, password, security_question_one, security_question_two, security_question_three)
+VALUES ('zmilanovic', 'BUYER', '$2a$10$u6kW6vBfu0W8US/k5wP6EuubLGWYgRLYaWN7ADpQS6GFV.NfDs6DC', '$2a$10$diw2RWVHhAorMLRKbA7xOu6v5ukCvI4bO/54j1qVmBDAOjva4X39C', '$2a$10$uGGTsu1u6LlG/dKtUCS3ReZD4aLrH.F3HuueuT28de36XKig4uuZ.', '$2a$10$TDYRgxKprTAVnKdF.jWx1ORpHLHVkclsW3u3PzHbBYYt92bK2.RiW' );
+
+INSERT INTO user_buyer(id, address) VALUES (11, 'pantovčak 241');
+
+INSERT INTO auth_user(username, user_type, password, security_question_one, security_question_two, security_question_three)
 VALUES ('admin', 'ADMIN', '$2a$10$096qkydajQZnEZKnf5SzAOTpL9jN03LUmfs.iQ0eYjKuD0X33diOS', '$2a$10$hUsLjGh0UJCRZYq9d44dVOZzuWLFxU.KkYa7wrBCYSsaeoBqCQrIe', '$2a$10$ja7VBxW6Phagx1kcANf1gu4zoRPJy.uslgbU6iVm5KUOrxeixb0wq', '$2a$10$rrBAxX9hP9nNswaM3BdViuB0HGn0Gw74fEvQhC8ULy7vn5ooB4sjG');
