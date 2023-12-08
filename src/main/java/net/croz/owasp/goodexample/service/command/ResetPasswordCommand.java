@@ -1,9 +1,14 @@
 package net.croz.owasp.goodexample.service.command;
 
+import jakarta.validation.constraints.Pattern;
+
 public class ResetPasswordCommand {
 
     private String username;
 
+    // OWASP[38]
+    // OWASP[39]
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d).{16,}$")
     private String password;
     private String questionOneAnswer;
     private String questionTwoAnswer;

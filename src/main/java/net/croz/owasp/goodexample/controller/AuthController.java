@@ -2,6 +2,7 @@ package net.croz.owasp.goodexample.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import net.croz.owasp.goodexample.controller.response.UserResponse;
 import net.croz.owasp.goodexample.entity.AuthUser;
 import net.croz.owasp.goodexample.mapper.CreateMapper;
@@ -44,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/password-reset")
-    public void resetPassword(@RequestBody ResetPasswordCommand resetPasswordCommand) {
+    public void resetPassword(@Valid @RequestBody ResetPasswordCommand resetPasswordCommand) {
         authService.resetPassword(resetPasswordCommand);
     }
 
