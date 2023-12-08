@@ -52,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
     public void resetPassword(ResetPasswordCommand resetPasswordCommand) {
         final AuthUser existingUser = authUserService.loadUserByUsername(resetPasswordCommand.getUsername());
 
+        // OWASP[133]
         final boolean questionOne = passwordEncoder.matches(resetPasswordCommand.getQuestionOneAnswer(), existingUser.getSecurityQuestionOne());
         final boolean questionTwo = passwordEncoder.matches(resetPasswordCommand.getQuestionTwoAnswer(), existingUser.getSecurityQuestionTwo());
         final boolean questionThree = passwordEncoder.matches(resetPasswordCommand.getQuestionThreeAnswer(), existingUser.getSecurityQuestionThree());
