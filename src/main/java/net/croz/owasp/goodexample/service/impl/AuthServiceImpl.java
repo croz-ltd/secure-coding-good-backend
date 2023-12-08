@@ -52,12 +52,9 @@ public class AuthServiceImpl implements AuthService {
     public void resetPassword(ResetPasswordCommand resetPasswordCommand) {
         final AuthUser existingUser = authUserService.loadUserByUsername(resetPasswordCommand.getUsername());
 
-        final boolean questionOne =
-            Objects.equals(existingUser.getSecurityQuestionOne(), resetPasswordCommand.getQuestionOneAnswer());
-        final boolean questionTwo =
-            Objects.equals(existingUser.getSecurityQuestionTwo(), resetPasswordCommand.getQuestionTwoAnswer());
-        final boolean questionThree =
-            Objects.equals(existingUser.getSecurityQuestionThree(), resetPasswordCommand.getQuestionThreeAnswer());
+        final boolean questionOne = passwordEncoder.matches(resetPasswordCommand.getQuestionOneAnswer(), existingUser.getSecurityQuestionOne());
+        final boolean questionTwo = passwordEncoder.matches(resetPasswordCommand.getQuestionTwoAnswer(), existingUser.getSecurityQuestionTwo());
+        final boolean questionThree = passwordEncoder.matches(resetPasswordCommand.getQuestionThreeAnswer(), existingUser.getSecurityQuestionThree());
         final boolean allQuestionsCorrect = questionOne && questionTwo && questionThree;
 
         if (!allQuestionsCorrect) {

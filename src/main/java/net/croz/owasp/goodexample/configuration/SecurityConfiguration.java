@@ -34,7 +34,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             // OWASP[73]
-            .csrf((csrf) -> csrf.ignoringRequestMatchers("/h2-console/**"))
+            .csrf((csrf) -> csrf.ignoringRequestMatchers("/h2-console/**", "/auth/password-reset"))
             .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions().disable())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
